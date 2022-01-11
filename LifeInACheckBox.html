@@ -1,49 +1,113 @@
 <!DOCTYPE html>
 <html>
   <head>
+	<meta charset="utf-8">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@200&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://cdn.shopify.com/s/files/1/0062/4309/0499/products/2022-30-brightyellow_240x.png?v=1587085556">
     <title>LifeInACheckBox</title>
     <style type="text/css">
+    	* {
+          font-family: 'Montserrat Alternates', sans-serif;
+          font-weight: bolder;
+	        font-size: 20px;
+          border: none;
+          text-decoration: none;
+          color: #343434;
+          text-align: center;
+          align-items: center;
+      }
+        
+		  *:focus {
+          outline: none !important;
+		  }
+        
+		  html {
+          scroll-behavior: smooth;
+		  }
+        
     	body {
-    		background-color: #ffffff;
+          background-color: #FF6C52;
+          overflow: hidden;
     	}
 
-      	#day, #month, #year {
-        	width: 50px;
-      	}
+      ::-webkit-scrollbar {
+          display: none;
+      }
 
-      	.tableCheckBox {
+    	td {
       		padding: 0, 0, 0, 0;
-      		width: 10px;
-      		height: 10px;
-      		border-style: solid;
-      		border-color: #000000;
-      		border-width: 1px;
-      	}
+    	}
 
-      	td, tr, table {
-      		border-collapse: collapse;
-      	}
+    	.checked {
+      		background-color: #FED900;
+    	}
 
-      	.checked {
-      		background-color: #62d2a2;
-      	}
+    	.unchecked {
+      		background-color: #343434;
+    	}
 
-      	.unchecked {
-      		background-color: #ffffff;
-      	}
+    	#tableBox {
+          width: 100%;
+          height: 100%;
+      		position: absolute;
+          left: 50%;
+          transform: translate(-50%, -1%);(-90deg);
+          z-index:-1;
+    	}
+
+    	input[type=number]::-webkit-inner-spin-button {
+  			 -webkit-appearance: none;
+      }		  
+
+    	input, button {
+      		padding-left: 15px;
+      		width: 150px !important;
+      		height: 50px;
+          background-color: rgba(0, 0, 0, 0);
+          color: white;
+          font-weight: bolder;
+          transition-duration: 0.2s;
+    	}
+
+      input:hover, button:hover {
+          background-color: rgba(0, 0, 0, 0.5);
+          transition-duration: 0.2s;
+    	}
+
+      #day {
+          position: absolute;
+          top: 90%;
+          left: 30%;
+      }
+
+      #month {
+          position: absolute;
+          top: 90%;
+          left: 40%;
+      }
+
+      #year {
+          position: absolute;
+          top: 90%;
+          left: 50%;
+      }
+
+      #submitButton {
+          position: absolute;
+          top: 90%;
+          left: 60%;
+      }
+
     </style>
   </head>
   <body>
-    <label>Date of Birth:</label>
-    <input type="number" id="day">
-    <input type="number" id="month">
-    <input type="number" id="year">
-    <button onclick="rerender()">Submit</button>
-    <table id="tableBox"></table>
-    <div id="piechart"></div>
+        <input onkeyup="check()" placeholder="Day" type="number" id="day">
+        <input onkeyup="check()" placeholder="Month" type="number" id="month">
+        <input onkeyup="check()" placeholder="Year" type="number" id="year">
+    <table cellspacing="0" cellpadding="0" id="tableBox"></table>
 
     <script type="text/javascript">
-      	document.body.style.zoom = "60%";
 		if (localStorage.getItem("day") && localStorage.getItem("month") && localStorage.getItem("year")) {
 		    document.getElementById("day").value = localStorage.getItem("day");
 		    document.getElementById("month").value = localStorage.getItem("month");
@@ -60,21 +124,26 @@
 
 		let week = Math.round(((y2 - y1) * 365 + (m2 - m1) * 30.417 + (d2 - d1)) / 7);
 
-		console.log((week / 4171) * 100);
-		console.log(100 - (week / 4171) * 100);
-
-		for (let i = 1; i < 81; i++) {
+		let n = 0;
+		for (let i = 1; i < 53; i++) {
 		    let x = document.createElement("TR");
 		    document.getElementById("tableBox").appendChild(x);
-		    for (let j = 1; j < 53; j++) {
+		    for (let j = 1; j < 81; j++) {
+		    	n++;
 		        let y = document.createElement("TD");
 		        x.appendChild(y);
 		        y.setAttribute("class", "tableCheckBox unchecked");
-		        if ((i*52) + j < week) {
+		        if (n < week) {
 		            y.setAttribute("class", "tableCheckBox checked");
 		        }
 		    }
 		}
+
+    var timer;
+    function check(){
+         clearTimeout(timer);
+         timer = setTimeout(rerender(),10000);
+    }
 
 		function rerender() {
 		    if (document.getElementById("tableBox")) {
@@ -95,21 +164,20 @@
 
 		    let week = Math.round(((y2 - y1) * 365 + (m2 - m1) * 30.417 + (d2 - d1)) / 7);
 
-		    console.log((week / 4171) * 100);
-		    console.log(100 - (week / 4171) * 100);
-
-		    for (let i = 1; i < 81; i++) {
-		    let x = document.createElement("TR");
-		    document.getElementById("tableBox").appendChild(x);
-		    for (let j = 1; j < 53; j++) {
-		        let y = document.createElement("TD");
-		        x.appendChild(y);
-		        y.setAttribute("class", "tableCheckBox unchecked");
-		        if ((i*52) + j < week) {
-		            y.setAttribute("class", "tableCheckBox checked");
-		        }
-		    }
-		}
+		    let n = 0;
+			for (let i = 1; i < 53; i++) {
+			    let x = document.createElement("TR");
+			    document.getElementById("tableBox").appendChild(x);
+			    for (let j = 1; j < 81; j++) {
+			    	n++;
+			        let y = document.createElement("TD");
+			        x.appendChild(y);
+			        y.setAttribute("class", "tableCheckBox unchecked");
+			        if (n < week) {
+			            y.setAttribute("class", "tableCheckBox checked");
+			        }
+			    }
+			}
 		}
     </script>
   </body>
