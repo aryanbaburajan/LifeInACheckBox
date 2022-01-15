@@ -7,33 +7,33 @@
   <link rel="icon" href="https://cdn.shopify.com/s/files/1/0062/4309/0499/products/2022-30-brightyellow_240x.png?v=1587085556">
     <title>LifeInACheckBox</title>
     <style type="text/css">
-    	* {
-          font-family: 'Montserrat Alternates', sans-serif;
-          font-weight: bolder;
-	        font-size: 20px;
-          border: none;
-          text-decoration: none;
-          color: #343434;
-          text-align: center;
-          align-items: center;
-      }
-        
-		  *:focus {
-          outline: none !important;
-		  }
-        
-		  html {
-          scroll-behavior: smooth;
-		  }
+		* {
+			font-family: 'Montserrat Alternates', sans-serif;
+			font-weight: bolder;
+			font-size: 20px;
+			border: none;
+			text-decoration: none;
+			color: #343434;
+			text-align: center;
+			align-items: center;
+		}
+
+		*:focus {
+		outline: none !important;
+		}
+
+		html {
+		scroll-behavior: smooth;
+		}
         
     	body {
           background-color: #FF6C52;
           overflow: hidden;
     	}
 
-      ::-webkit-scrollbar {
-          display: none;
-      }
+		::-webkit-scrollbar {
+			display: none;
+		}
 
     	td {
       		padding: 0, 0, 0, 0;
@@ -52,59 +52,105 @@
           height: 100%;
       		position: absolute;
           left: 50%;
-          transform: translate(-50%, -1%);(-90deg);
-          z-index:-1;
+          transform: translate(-50%, -1%);
+          z-index: -1;
     	}
 
-    	input[type=number]::-webkit-inner-spin-button {
-  			 -webkit-appearance: none;
-      }		  
+		input[type=number]::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}		  
 
-    	input, button {
-      		padding-left: 15px;
-      		width: 150px !important;
-      		height: 50px;
-          background-color: rgba(0, 0, 0, 0);
-          color: white;
-          font-weight: bolder;
-          transition-duration: 0.2s;
-    	}
+		input, button {
+			color: white;
+			font-weight: bolder;
+			transition-duration: 0.2s;
+		}
 
-      input:hover, button:hover {
-          background-color: rgba(0, 0, 0, 0.5);
-          transition-duration: 0.2s;
-    	}
+		input:hover, button:hover {
+			background-color: rgba(0, 0, 0, 0.5);
+			transition-duration: 0.2s;
+		}
 
-      #day {
-          position: absolute;
-          top: 90%;
-          left: 30%;
-      }
+		#submitButton {
+			position: absolute;
+			top: 90%;
+			left: 60%;
+		}
 
-      #month {
-          position: absolute;
-          top: 90%;
-          left: 40%;
-      }
+		.flex{
+			position: fixed;
+			bottom: 5px;
+			display: flex;
+			flex-direction: row;
+			margin: 10px;
+			height: 50px;
+			transform: translate(-50%, -50%);
+			left: 50%;
+		}
+		.flex > input, .flex button{
+			height: 50px;
+			width: 20vw;
+			position: relative;
+			top: 0;
+			left: 0;
+			border: 3px solid rgba(0, 0, 0, 0.349);
+			color: black;
+			text-align: center;
+			line-height: 75px;
+			font-size: 30px;
+			background-color: rgba(0, 0, 0, 0);
+			margin-left: 20px;
+		}
+		.flex > input:hover, .flex button:hover{
+			width: 21vw;
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+		.flex > input:focus, .flex button:focus{
+			background-color: rgba(0, 0, 0, 0.5);
+			color: white;
+		}
 
-      #year {
-          position: absolute;
-          top: 90%;
-          left: 50%;
-      }
 
-      #submitButton {
-          position: absolute;
-          top: 90%;
-          left: 60%;
-      }
+
+		::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+			color: white;
+		}
+		::-moz-placeholder { /* Firefox 19+ */
+			color: white;
+		}
+		:-ms-input-placeholder { /* IE 10+ */
+			color: white;
+		}
+		:-moz-placeholder { /* Firefox 18- */
+			color: white;
+		}
+
+
+
+
+		@media only screen and (max-width: 600px) {
+			.flex {
+				bottom: 130px;
+				flex-direction: column;
+			}
+			.flex > input, .flex button{
+				width: 35vw;
+				margin-top: 10px;
+			}
+			.flex > input:hover, .flex button:hover{
+				width: 40vw;
+				margin-left: 20px;
+			}
+		}
 
     </style>
-  </head>
-  <body>
-        <input onkeyup="check()" placeholder="Day" type="number" id="day">
-        <input onkeyup="check()" placeholder="Month" type="number" id="month">
-        <input onkeyup="check()" placeholder="Year" type="number" id="year">
+	</head>
+	<body>
+		<div class="flex">
+			<input onkeyup="check()" placeholder="Day" type="number" id="day">
+			<input onkeyup="check()" placeholder="Month" type="number" id="month">
+			<input onkeyup="check()" placeholder="Year" type="number" id="year">
+		</div>
     <table cellspacing="0" cellpadding="0" id="tableBox"></table>
 
     <script type="text/javascript">
